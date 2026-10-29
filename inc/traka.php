@@ -118,19 +118,9 @@ add_action( 'wp_footer', function() {
 	<?php if ( $politika ) : ?><p class="jwsk-traka__politika"><a href="<?php echo esc_url( $politika ); ?>"><?php echo $t( 'politika' ); ?></a></p><?php endif; ?>
 </section>
 <script id="jws-kolacici-traka-kontrast">
-/* Boja „Prihvatam sve": ako sajt ima glavno dugme (Bricks .btn--primary / .bricks-background-primary, Elementor, Gutenberg),
-   uzima se njegova stvarna boja; AT/ACSS varijabla primary ponekad nije boja dugmadi (npr. tamna boja brenda, a dugme žuto).
-   Zatim tekst na dugmetu: bijel ili taman, prema svjetlini pozadine. */
+/* Tekst na dugmetu: bijel ili taman, prema svjetlini pozadine. Boje dugmadi dolaze samo iz CSS varijabli sajta ili iz postavki,
+   nikad sa dugmadi na stranici: to bi davalo drugu boju na svakoj stranici. */
 (function () {
-	var t = document.querySelector('.jwsk-traka');
-	if (t && t.getAttribute('data-jwsk-boje') === 'sajt') {
-		var kand = document.querySelectorAll('.btn--primary,.bricks-button.bricks-background-primary,.elementor-button,.wp-block-button__link,.wp-element-button');
-		for (var i = 0; i < kand.length; i++) {
-			if (t.contains(kand[i])) continue;
-			var bg = getComputedStyle(kand[i]).backgroundColor;
-			if (bg && bg !== 'transparent' && !/rgba\([^)]*,\s*0\)$/.test(bg)) { t.style.setProperty('--jwsk-b1', bg); break; }
-		}
-	}
 	document.querySelectorAll('.jwsk-traka__dugme--1,.jwsk-traka__dugme--2').forEach(function (b) {
 		var m = getComputedStyle(b).backgroundColor.match(/\d+(\.\d+)?/g); if (!m) return;
 		var l = function (c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
