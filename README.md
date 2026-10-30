@@ -53,7 +53,7 @@ The choice is stored in the `jws_kolacici` cookie (`sve`, `nuzni`, `stat` or `ma
 
 Download `jws-kolacici.zip` from the [latest release](https://github.com/reuf-jahic/jws-kolacici/releases/latest) and upload it in Plugins, Add new. Settings are in Settings, Kolačići. New versions show up as a normal plugin update in WordPress (and in MainWP or any tool that reads plugin updates); the plugin checks this repository every 12 hours.
 
-With WP Rocket, clear the minified files cache after an update, otherwise the old script keeps being served.
+With WP Rocket, clear the minified files cache after an update, otherwise the old script keeps being served. The plugin excludes its own scripts from Delay JavaScript and its notice CSS from Remove Unused CSS, so the notice shows before the first click and the settings view keeps its styles.
 
 ## Not legal advice
 

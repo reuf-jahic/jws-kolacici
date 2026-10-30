@@ -78,6 +78,15 @@ add_action( 'wp_enqueue_scripts', function() {
 	wp_enqueue_script( 'jws-kolacici', JWSK_URL . 'js/jws-kolacici.js', [], JWSK_VERZIJA_PLUGINA, true );
 } );
 
+/* WP Rocket: Delay JS bi zadržao skripte trake do prvog dodira (posjetilac ode a traku nije vidio), a RUCSS bi iz CSS-a
+   kartice izbacio pravila za stanja kojih nema u HTML-u pri učitavanju (.is-postavke), pa se postavke ne bi otvarale */
+add_filter( 'rocket_delay_js_exclusions', function( $e ) {
+	return array_merge( (array) $e, [ 'jws-kolacici', 'jwsKolacici' ] );
+} );
+add_filter( 'rocket_rucss_inline_atts_exclusions', function( $e ) {
+	return array_merge( (array) $e, [ 'jws-kolacici-traka-css' ] );
+} );
+
 // Woo „izvor narudžbe" (kolačići sbjs_*) po defaultu prati PRIJE pristanka; ovdje radi tek uz saglasnost za izabranu grupu
 add_filter( 'wc_order_attribution_allow_tracking', function( $allow ) {
 	$o = jwsk_opcije();
