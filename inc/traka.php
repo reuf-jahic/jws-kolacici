@@ -49,7 +49,7 @@ add_action( 'wp_footer', function() {
 /* Dugmad su resetovana jer teme (Elementor, Divi, Astra) stilizuju svaki <button>: velika slova, sjena, margine */
 .jwsk-traka .jwsk-traka__dugme{appearance:none;display:flex;align-items:center;justify-content:center;width:100%;min-height:44px;margin:0;padding:8px 10px;
 	border:1px solid transparent;border-radius:var(--jwsk-radijus-dugme);box-shadow:none;background-image:none;
-	font-family:inherit;font-size:14px;font-weight:600;line-height:1.2;letter-spacing:normal;text-transform:none;text-decoration:none;text-align:center;cursor:pointer;transition:filter .15s}
+	font-family:inherit;font-size:14px;font-weight:500;line-height:1.2;letter-spacing:normal;text-transform:none;text-decoration:none;text-align:center;cursor:pointer;transition:filter .15s}
 .jwsk-traka .jwsk-traka__dugme:hover{filter:brightness(1.1)}
 .jwsk-traka .jwsk-traka__dugme--1{background-color:var(--jwsk-b1);border-color:var(--jwsk-b1);color:#fff}
 .jwsk-traka .jwsk-traka__dugme--2{background-color:var(--jwsk-b2);border-color:var(--jwsk-b2);color:#fff}
@@ -65,7 +65,7 @@ add_action( 'wp_footer', function() {
 .jwsk-traka__grupa{padding:10px 0;border-bottom:1px solid var(--jwsk-linija)}
 .jwsk-traka__grupa:last-child{border-bottom:0}
 .jwsk-traka__glava{display:flex;justify-content:space-between;align-items:center;gap:16px}
-.jwsk-traka .jwsk-traka__ime{font-weight:600}
+.jwsk-traka .jwsk-traka__ime{font-weight:500}
 .jwsk-traka .jwsk-traka__opis{margin-top:2px;color:var(--jwsk-tiho);font-size:13px;line-height:1.5}
 .jwsk-traka .jwsk-traka__switch{appearance:none;position:relative;flex-shrink:0;width:44px;height:24px;min-height:0;margin:0;padding:0;border:0;border-radius:12px;box-shadow:none;background:var(--jwsk-linija);cursor:pointer}
 .jwsk-traka__switch::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:transform .15s}

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: JWS kolačići
  * Description: Obavijest o kolačićima: izbor u kolačiću, Google i Meta tek uz saglasnost, evidencija pristanaka. Traka je Bricks popup sajta, ugrađena traka plugina (bilo koji builder) ili vlastiti HTML. / Cookie consent for any WordPress site.
- * Version: 1.5.1
+ * Version: 1.5.2
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Author: Jaha Web Solutions
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'JWSK_VERZIJA_PLUGINA', '1.5.1' );
+define( 'JWSK_VERZIJA_PLUGINA', '1.5.2' );
 define( 'JWSK_FAJL', __FILE__ );
 define( 'JWSK_DIR', plugin_dir_path( __FILE__ ) );
 define( 'JWSK_URL', plugin_dir_url( __FILE__ ) );
