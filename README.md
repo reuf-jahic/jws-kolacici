@@ -20,7 +20,7 @@ Made by [Jaha Web Solutions](https://jahaweb.com), a web studio that builds and 
 
 ## Three ways to show the notice
 
-1. **Built-in card** (default without Bricks): a small card in the bottom right corner, no overlay, site font, button colours taken from the site's colour variables (Advanced Themer, ACSS or Elementor) or set in the settings. "Accept all" and "Necessary only" are the same size, as the law requires.
+1. **Built-in card** (default without Bricks): a small card in the bottom right corner, no overlay, site font, button colours taken from the site's colour variables (Advanced Themer, ACSS or Elementor) or set in the settings. "Accept all" is filled, "Necessary only" is a bordered button of the same size and font, so refusing is as easy to see as accepting; "Settings" and the privacy link sit underneath.
 2. **Bricks popup:** design your own popup in Bricks; the plugin opens it and reads `data-jwsk` attributes.
 3. **Your own HTML** with `data-jwsk-traka`, in any builder.
 
