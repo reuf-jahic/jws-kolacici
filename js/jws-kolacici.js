@@ -160,6 +160,26 @@
 	}
 	/* Prikaz: bricks = Bricks popup (bricksOpenPopup); ugradjena (traka iz plugina) i vlastiti (element sajta sa
 	   data-jwsk-traka, bilo koji builder) = plugin sam skida i vraća atribut hidden */
+	/* Blokiranje (samo ugrađena traka, samo dok nema izbora): zastor, zaključan skrol, fokus na kartici (ne na „Prihvatam sve"),
+	   po zatvaranju fokus nazad gdje je bio */
+	var prijeFokus = null;
+	function blok(el, da) {
+		var z = document.querySelector('.jwsk-zastor');
+		if (!z || el.classList.contains('is-blok') === da) return;
+		z.hidden = !da;
+		el.classList.toggle('is-blok', da);
+		el.setAttribute('aria-modal', da ? 'true' : 'false');
+		document.documentElement.classList.toggle('jwsk-blokirano', da);
+		if (da) {
+			prijeFokus = document.activeElement;
+			el.setAttribute('tabindex', '-1');
+			el.focus({ preventScroll: true });
+		} else {
+			el.removeAttribute('tabindex');
+			if (prijeFokus && prijeFokus.focus && prijeFokus !== document.body) prijeFokus.focus({ preventScroll: true });
+			prijeFokus = null;
+		}
+	}
 	function otvori(postavke) {
 		if (D.prikaz === 'bricks') {
 			if (typeof window.bricksOpenPopup !== 'function' || !D.popup) return;
@@ -167,6 +187,7 @@
 		} else {
 			var el = traka(); if (!el) return;
 			el.hidden = false;
+			if (D.blok && !izbor()) blok(el, true);
 		}
 		var t = traka();
 		if (t) t.classList.toggle('is-postavke', !!postavke);
@@ -176,7 +197,7 @@
 		if (D.prikaz === 'bricks') {
 			if (typeof window.bricksClosePopup === 'function' && D.popup) window.bricksClosePopup(D.popup);
 		} else {
-			var el = traka(); if (el) { el.hidden = true; el.classList.remove('is-postavke'); }
+			var el = traka(); if (el) { blok(el, false); el.hidden = true; el.classList.remove('is-postavke'); }
 		}
 	}
 
@@ -230,6 +251,14 @@
 	document.addEventListener('keydown', function (e) {
 		var sw = e.target.closest && e.target.closest(sel('-switch'));
 		if (sw && sw.tagName !== 'BUTTON' && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); sw.click(); }
+		// Blokirana kartica: Tab kruži unutar nje
+		var t = traka();
+		if (e.key !== 'Tab' || !t || !t.classList.contains('is-blok')) return;
+		var f = [].filter.call(t.querySelectorAll('button,a[href],summary'), function (x) { return !x.disabled && x.offsetParent !== null; });
+		if (!f.length) return;
+		var a = document.activeElement, prvi = f[0], zadnji = f[f.length - 1];
+		if (!t.contains(a) || (e.shiftKey && (a === prvi || a === t))) { e.preventDefault(); (e.shiftKey ? zadnji : prvi).focus(); }
+		else if (!e.shiftKey && a === zadnji) { e.preventDefault(); prvi.focus(); }
 	});
 
 	window.jwsKolacici = { dozvoljeno: dozvoljeno, kad: kad, otvori: function () { otvori(true); } };

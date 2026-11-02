@@ -7,6 +7,7 @@ function jwsk_podrazumijevano() {
 	return [
 		'prikaz'          => 'auto',            // auto (Bricks popup ako je izabran, inače ugrađena) | bricks | ugradjena | vlastiti (HTML sajta sa data-jwsk-traka)
 		'popup'           => 0,                 // ID Bricks popupa (šablon tipa Popup)
+		'blokiraj'        => 0,                 // ugrađena traka: do prvog izbora zasivljena pozadina, kartica u sredini, stranica zaključana
 		'boja_izvor'      => 'sajt',            // ugrađena traka: sajt (primary + neutral/secondary iz AT, ACSS, Elementora) | rucno
 		'boja'            => '#1f6feb',         // „Prihvatam sve" kad sajt nema primary ili je izabrano ručno
 		'boja_2_uloga'    => 'neutral',         // „Samo neophodni": neutral | secondary boja sajta

@@ -31,6 +31,7 @@ function jwsk_podaci_za_js() {
 	return [
 		'prikaz'  => jwsk_prikaz(),
 		'popup'   => (int) $o['popup'],
+		'blok'    => 'ugradjena' === jwsk_prikaz() && $o['blokiraj'] ? 1 : 0,
 		'ajax'    => admin_url( 'admin-ajax.php' ),
 		'verzija' => jwsk_verzija(),
 		'dana'    => (int) $o['dana'],

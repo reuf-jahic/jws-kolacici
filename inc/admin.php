@@ -32,6 +32,7 @@ function jwsk_ocisti( $u ) {
 	return [
 		'prikaz'          => in_array( $u['prikaz'] ?? '', [ 'auto', 'bricks', 'ugradjena', 'vlastiti' ], true ) ? $u['prikaz'] : 'auto',
 		'popup'           => absint( $u['popup'] ?? 0 ),
+		'blokiraj'        => empty( $u['blokiraj'] ) ? 0 : 1,
 		'boja_izvor'      => 'rucno' === ( $u['boja_izvor'] ?? '' ) ? 'rucno' : 'sajt',
 		'boja'            => sanitize_hex_color( $u['boja'] ?? '' ) ?: $d['boja'],
 		'boja_2_uloga'    => 'secondary' === ( $u['boja_2_uloga'] ?? '' ) ? 'secondary' : 'neutral',
@@ -144,6 +145,10 @@ function jwsk_stranica() {
 						<?php endforeach; ?>
 					</select>
 					<?php $opis( 'Sada: ' . jwsk_prikaz() . '. Ugrađena traka radi na Elementoru, Diviju, Gutenbergu i bez buildera; tekstovi su gotovi (bs/en/sl), boje dugmadi ispod.', 'Now: ' . jwsk_prikaz() . '. The built-in banner works with Elementor, Divi, Gutenberg and without a builder; texts are ready (bs/en/sl), button colours below.' ); ?>
+				</td></tr>
+				<tr><th><?php echo esc_html( jwsk_t( 'Blokiranje (ugrađena traka)', 'Blocking (built-in banner)' ) ); ?></th><td>
+					<label><input type="checkbox" name="<?php echo $n; ?>[blokiraj]" value="1" <?php checked( $o['blokiraj'] ); ?>> <?php echo esc_html( jwsk_t( 'Zaključaj stranicu dok posjetilac ne izabere', 'Lock the page until the visitor chooses' ) ); ?></label>
+					<?php $opis( 'Isključeno (standard): kartica u donjem desnom uglu, stranica se koristi normalno. Uključeno: pri prvoj posjeti pozadina je zasivljena, kartica je u sredini, skrol i klikovi iza nje su zaključani dok posjetilac ne izabere (i „Samo neophodni" je izbor). Više ljudi izabere, pa GA4 ima više podataka, ali posjetilac prvo udari u prozor. Kad se postavke kasnije otvore iz podnožja, kartica je opet obična.', 'Off (standard): a card in the bottom right corner, the page stays usable. On: on the first visit the background is dimmed, the card is centred, scrolling and clicks behind it are locked until the visitor chooses ("Necessary only" is a choice too). More visitors choose, so GA4 gets more data, but the visitor hits a dialog first. When the settings are reopened from the footer later, the card is a normal one again.' ); ?>
 				</td></tr>
 				<tr><th><?php echo esc_html( jwsk_t( 'Boje dugmadi (ugrađena traka)', 'Button colours (built-in banner)' ) ); ?></th><td>
 					<label><input type="radio" name="<?php echo $n; ?>[boja_izvor]" value="sajt" <?php checked( $o['boja_izvor'], 'sajt' ); ?>> <?php echo esc_html( jwsk_t( 'Boje sajta: „Prihvatam sve" = primary, „Samo neophodni" =', 'Site colours: "Accept all" = primary, "Necessary only" =' ) ); ?></label>
