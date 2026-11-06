@@ -81,17 +81,39 @@
 		if (G.napredno) return true;
 		return G.nacin === 'gtm' ? dozvoljeno('statistika') || dozvoljeno('marketing') : dozvoljeno('statistika');
 	}
+	/* Praćenje kroz više domena: Google dodaje ?_gl=… na link ka drugom domenu sajta (npr. .com na .ba).
+	   Parametar se odmah skloni iz adresne trake i čuva u memoriji; uz saglasnost se vrati samo dok ga Google
+	   ne pročita (gtag 'get' callback, GTM nekoliko sekundi poslije učitavanja), pa se opet skloni. Bez saglasnosti
+	   Google ga nikad ne vidi, a važi ionako samo oko 2 minute. */
+	var GL = null;
+	function adresaGl(v) {
+		try {
+			var u = new URL(location.href);
+			if (v) u.searchParams.set('_gl', v); else u.searchParams.delete('_gl');
+			history.replaceState(history.state, '', u.pathname + u.search + u.hash);
+		} catch (e) {}
+	}
+	try { GL = new URL(location.href).searchParams.get('_gl'); } catch (e) {}
+	if (GL) adresaGl(null);
+	var glOcisceno = false;
+	function glOcisti() { if (!glOcisceno) { glOcisceno = true; adresaGl(null); } }
+
 	function googleUcitaj() {
 		if (!googleSmije() || window.jwskGoogle) return; window.jwskGoogle = true;
+		if (GL) adresaGl(GL);
 		var s = document.createElement('script'); s.async = true;
 		if (G.nacin === 'gtm') {
 			dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
 			s.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(G.id);
+			if (GL) s.onload = function () { setTimeout(glOcisti, 3000); };
 		} else {
 			s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(G.id);
 			gtag('js', new Date());
 			gtag('config', G.id);
+			if (GL) gtag('get', G.id, 'client_id', glOcisti);
 		}
+		// Ako je Google blokiran (blokator reklama), callback ne dođe; adresa se svejedno očisti
+		if (GL) { s.onerror = glOcisti; setTimeout(glOcisti, 8000); }
 		document.head.appendChild(s);
 	}
 	// Događaji prodavnice (inc/ga4.php): tek uz Statistiku; GTM ih dobija kao standardni ecommerce dataLayer
