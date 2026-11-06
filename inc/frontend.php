@@ -105,7 +105,11 @@ add_shortcode( 'jws_kolacici_spisak', function( $atts ) {
 	$t  = function( $k ) use ( $j ) {
 		return esc_html( jwsk_tekst( $k, $j ) );
 	};
-	$h  = '<table class="jwsk-spisak"><thead><tr><th>' . $t( 'th_kolacic' ) . '</th>' . ( $a['grupa'] ? '' : '<th>' . $t( 'th_vrsta' ) . '</th>' )
+	// Okvir skroluje sam (5 kolona ne stane na telefon), a dugi nazivi kolačića se lome, pa stranica ne postaje šira od ekrana.
+	static $stil = false;
+	$h  = $stil ? '' : '<style>.jwsk-spisak-okvir{max-width:100%;overflow-x:auto}.jwsk-spisak-okvir .jwsk-spisak td:first-child{overflow-wrap:anywhere}</style>';
+	$stil = true;
+	$h .= '<div class="jwsk-spisak-okvir"><table class="jwsk-spisak"><thead><tr><th>' . $t( 'th_kolacic' ) . '</th>' . ( $a['grupa'] ? '' : '<th>' . $t( 'th_vrsta' ) . '</th>' )
 		. '<th>' . $t( 'th_pruzalac' ) . '</th><th>' . $t( 'th_svrha' ) . '</th><th>' . $t( 'th_trajanje' ) . '</th></tr></thead><tbody>';
 	foreach ( jwsk_spisak() as $k ) {
 		if ( $a['grupa'] && $k['grupa'] !== $a['grupa'] ) {
@@ -115,5 +119,5 @@ add_shortcode( 'jws_kolacici_spisak', function( $atts ) {
 			. ( $a['grupa'] ? '' : '<td>' . $t( 'grupa_' . $k['grupa'] ) . '</td>' )
 			. '<td>' . esc_html( $k['pruzalac'] ) . '</td><td>' . esc_html( jwsk_polje( $k, 'svrha', $j ) ) . '</td><td>' . esc_html( jwsk_polje( $k, 'trajanje', $j ) ) . '</td></tr>';
 	}
-	return $h . '</tbody></table>';
+	return $h . '</tbody></table></div>';
 } );
