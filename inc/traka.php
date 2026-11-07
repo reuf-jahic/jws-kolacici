@@ -113,7 +113,7 @@ html.jwsk-blokirano{overflow:hidden}
 				<?php endif; ?>
 			</div>
 			<p class="jwsk-traka__opis"><?php echo $t( 'opis_' . $g ); ?></p>
-			<details><summary><?php echo $t( 'spisak' ); ?></summary><?php echo do_shortcode( '[jws_kolacici_spisak grupa="' . esc_attr( $g ) . '"]' ); // phpcs:ignore ?></details>
+			<details><summary><?php echo $t( 'spisak' ); ?></summary><?php echo do_shortcode( '[jws_kolacici_spisak traka="1" grupa="' . esc_attr( $g ) . '"]' ); // phpcs:ignore ?></details>
 		</div>
 		<?php endforeach; ?>
 	</div>
