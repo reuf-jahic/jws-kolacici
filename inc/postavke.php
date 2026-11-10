@@ -13,7 +13,7 @@ function jwsk_podrazumijevano() {
 		'boja_2_uloga'    => 'neutral',         // „Samo neophodni": neutral | secondary boja sajta
 		'boja_2'          => '#1f2933',         // „Samo neophodni" kad sajt nema tu boju ili je izabrano ručno
 		'verzija'         => gmdate( 'Y-m-d' ), // ručno se mijenja kad se promijeni TEKST; alati i spisak dodaju svoj otisak sami
-		'dana'            => 180,               // koliko važi izbor; zakon dozvoljava najviše 12 mjeseci
+		'dana'            => 365,               // koliko važi izbor (12 mjeseci); zakon dozvoljava najviše 12 mjeseci
 		'grupe'           => [ 'statistika' => 1, 'marketing' => 1 ],
 		'google_nacin'    => 'nista',           // nista | ga4 (gtag direktno) | gtm (Tag Manager); nikad oba, inače se GA4 broji dvaput
 		'ga4_id'          => '',

@@ -173,7 +173,7 @@ function jwsk_stranica() {
 				</td></tr>
 				<tr><th><label for="jwsk-dana"><?php echo esc_html( jwsk_t( 'Izbor važi (dana)', 'Choice lasts (days)' ) ); ?></label></th><td>
 					<input id="jwsk-dana" type="number" min="1" max="365" name="<?php echo $n; ?>[dana]" value="<?php echo (int) $o['dana']; ?>" class="small-text">
-					<?php $opis( 'Najviše 365 (12 mjeseci). Standard flote: 180.', 'At most 365 (12 months). Fleet standard: 180.' ); ?>
+					<?php $opis( 'Najviše 365 (12 mjeseci). Standard flote: 365.', 'At most 365 (12 months). Fleet standard: 365.' ); ?>
 				</td></tr>
 				<tr><th><?php echo esc_html( jwsk_t( 'Grupe', 'Groups' ) ); ?></th><td>
 					<label><input type="checkbox" checked disabled> <?php echo esc_html( jwsk_grupa_naziv( 'neophodni' ) ); ?></label><br>

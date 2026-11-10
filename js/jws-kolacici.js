@@ -29,7 +29,7 @@
 	/* --- Kolačići --- */
 	function kolacic(n) { var m = document.cookie.match('(?:^|; )' + n + '=([^;]*)'); return m ? decodeURIComponent(m[1]) : null; }
 	function upisi(n, v) {
-		document.cookie = n + '=' + encodeURIComponent(v) + '; Max-Age=' + (D.dana || 180) * 86400 + '; Path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+		document.cookie = n + '=' + encodeURIComponent(v) + '; Max-Age=' + (D.dana || 365) * 86400 + '; Path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
 	}
 	function obrisi(n) {
 		var dom = location.hostname.replace(/^www\./, '');
